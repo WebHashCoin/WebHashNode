@@ -1,0 +1,39 @@
+{
+  "name": "webhash/node",
+  "description": "PHP Node for WebHash",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "WebHash"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "doctrine/annotations": "^1.13.3",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "ext-pdo_sqlite": "*",
+    "ext-gmp": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
+    "ext-bcmath": "*",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "WebHash\\": "webhash/",
+      "WebHash\\Annotation\\": "webhash/annotation/",
+      "WebHash\\Controller\\": "webhash/controller/",
+      "WebHash\\Helper\\": "webhash/helper/",
+      "WebHash\\Network\\": "webhash/network/",
+      "WebHash\\Network\\Dtabase\\DAO\\": "webhash/network/database/dao/",
+      "WebHash\\Network\\Database\\": "webhash/network/database/",
+      "WebHash\\Network\\Database\\Migration\\": "webhash/network/database/migration/",
+      "WebHash\\Network\\Cryptography\\": "webhash/network/cryptography/",
+      "WebHash\\Network\\Cryptography\\Algorithms\\": "webhash/network/cryptography/algorithms/",
+      "WebHash\\Network\\Functions\\": "webhash/network/functions/",
+      "WebHash\\Network\\Miner\\": "webhash/network/miner/"
+    }
+  }
+}

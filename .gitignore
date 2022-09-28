@@ -1,0 +1,10 @@
+#ignore composer files
+composer.lock
+vendor/
+#ignore editor files
+.idea
+.vscode
+
+#ignore webhash generated test files
+webhash.db
+test/test-wallet.json
