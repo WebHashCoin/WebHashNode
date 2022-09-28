@@ -7,4 +7,4 @@ vendor/
 
 #ignore webhash generated test files
 webhash.db
-test/test-wallet.json
+test-wallet.json
