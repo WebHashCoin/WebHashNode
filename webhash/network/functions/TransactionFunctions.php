@@ -41,8 +41,6 @@ class TransactionFunctions
         $unconfirmedTransactionsSum = $transactionEntity->getUnconfirmedTransactionsSumOfWallet($transactionSender, $transactionId);
         $pendingTransactionsSum = $waitingTransactionsSum + $unconfirmedTransactionsSum;
 
-        error_log("pendingTransactionsSum: $pendingTransactionsSum");
-
         if ($transactionTimestamp > time()) {
             return Result::error("Timestamp is in the future");
         }
@@ -51,9 +49,6 @@ class TransactionFunctions
             $walletEntity = new WalletEntity(WebHash::getDatabaseConnection());
             $transactionSenderBalance = $walletEntity->getBalance($transactionSenderAddress);
             $transactionSenderBalance -= $pendingTransactionsSum;
-
-            error_log("transactionSenderBalance: $transactionSenderBalance");
-            error_log("fullTransactionAmount: $fullTransactionAmount");
 
             //check if sender balance is smaller than transaction amount + fee with accurate precision
             if (bccomp($transactionSenderBalance, $fullTransactionAmount, 8) == -1) {

@@ -24,7 +24,7 @@ class WebHash
     public static int $mining_deadline = 240;
     public static int $mining_reward_max = 100;
     public static int $mining_reward_halving = 210000;
-    public static int $mining_target_blocktime = 10;
+    public static int $mining_target_blocktime = 1;
     public static int $mining_starting_difficulty = 1000000000000;
 
     private static DatabaseConnection $databaseConnection;

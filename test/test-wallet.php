@@ -1,10 +1,12 @@
 <?php
 
+use WebHash\Network\Functions\WalletFunctions;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $filename = 'test-wallet.json';
 if(!file_exists($filename)) {
-    $wallet = \WebHash\Network\Functions\WalletFunctions::generateWallet();
+    $wallet = WalletFunctions::generateWallet();
     $publicKey = $wallet['publicKey'];
     $privateKey = $wallet['privateKey'];
     $file = fopen($filename, 'w');
@@ -19,5 +21,5 @@ fclose($file);
 //set global wallet constants
 define('PUBLIC_KEY', $publicKey);
 define('PRIVATE_KEY', $privateKey);
-define('ADDRESS', \WebHash\Network\Functions\WalletFunctions::generateAddress($publicKey));
+define('ADDRESS', WalletFunctions::generateAddress($publicKey));
 

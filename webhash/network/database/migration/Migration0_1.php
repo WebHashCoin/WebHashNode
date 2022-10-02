@@ -65,14 +65,6 @@ class Migration0_1 extends AbstractMigration
             `blocks_mined` INTEGER NOT NULL
         )');
 
-        //create trigger after block delete to update wallets balance
-        $this->db->exec('CREATE TRIGGER IF NOT EXISTS `update_wallets_balance` AFTER DELETE ON `blocks` FOR EACH ROW BEGIN
-            UPDATE `wallets` SET `balance` = `balance` - (SELECT `amount` FROM `transactions` WHERE `recipient` = `wallets`.`address` AND `block_id` = OLD.`id`)    WHERE `address` =    (SELECT `recipient` FROM `transactions` WHERE `recipient` = `wallets`.`address` AND `block_id` = OLD.`id`);
-            UPDATE `wallets` SET `balance` = `balance` + (SELECT `amount` FROM `transactions` WHERE `sender` =    `wallets`.`public_key` AND `block_id` = OLD.`id`) WHERE `public_key` = (SELECT `sender` FROM `transactions` WHERE `sender` =       `wallets`.`public_key` AND `block_id` = OLD.`id`);
-            UPDATE `wallets` SET `balance` = `balance` - (SELECT `fee`    FROM `transactions` WHERE `recipient` = `wallets`.`address` AND `block_id` = OLD.`id`)    WHERE `address` =    (SELECT `recipient` FROM `transactions` WHERE `recipient` = `wallets`.`address` AND `block_id` = OLD.`id`);
-            UPDATE `wallets` SET `balance` = `balance` + (SELECT `fee`    FROM `transactions` WHERE `sender` =    `wallets`.`public_key` AND `block_id` = OLD.`id`) WHERE `public_key` = (SELECT `sender` FROM `transactions` WHERE `sender` =       `wallets`.`public_key` AND `block_id` = OLD.`id`);
-        END');
-
         //create trigger after block delete to move unconfirmed_transactions to waiting_transactions
         $this->db->exec('CREATE TRIGGER IF NOT EXISTS `move_unconfirmed_transactions` AFTER DELETE ON `blocks` FOR EACH ROW BEGIN
             INSERT INTO `waiting_transactions` SELECT * FROM `unconfirmed_transactions`;

@@ -2,6 +2,7 @@
 
 use WebHash\Network\Cryptography\Algorithms\AlgorithmArgon2id;
 use WebHash\Network\Cryptography\SHA3;
+use WebHash\Network\Functions\WalletFunctions;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -40,3 +41,13 @@ for($i = 0; $i < $times; $i++) {
 }
 $end = microtime(true);
 echo "Argon2id(hash/verify) x $times: " . ($end - $start) . ' seconds' . PHP_EOL;
+
+
+//benchmark wallet generation
+$start = microtime(true);
+$times = 10;
+for($i = 0; $i < $times; $i++) {
+    $wallet = WalletFunctions::generateWallet();
+}
+$end = microtime(true);
+echo "Wallet generation x $times: " . ($end - $start) . ' seconds' . PHP_EOL;
